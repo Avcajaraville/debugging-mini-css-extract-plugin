@@ -32,18 +32,35 @@ export default {
     noParse: /es6-promise\.js$/,
     rules: [
       {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          ...env.isProd
-            ? [
-              {
-                loader: MiniCssExtractPlugin.loader
-              }
-            ]
-            : ['vue-style-loader'],
-          'css-loader',
-          'sass-loader'
-        ]
+        test: /\.(css|scss)$/,
+        oneOf: env.isProd
+          ? [
+            {
+              test: path.join(__dirname, '..', 'App.vue'),
+              use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+              use: ['vue-style-loader', 'css-loader', 'sass-loader']
+            }
+          ]
+          : [
+            {
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    sourceMap: true,
+                    importLoaders: 3
+                  }
+                },
+                {
+                  loader: 'sass-loader',
+                  options: { sourceMap: true }
+                }
+              ]
+            }
+          ]
       },
       {
         test: /\.vue$/,

@@ -15,7 +15,7 @@
     "start": "npm run build && NODE_ENV=production npx babel-node ./src/server.js"
   },
   "pre-commit": [
-    "lint",
+    // "lint",
     "prettier"
   ],
   "nodemonConfig": {
