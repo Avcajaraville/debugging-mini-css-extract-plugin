@@ -1,7 +1,6 @@
 <template>
-  <p class="about">
-    {{ aboutText }}
-    <span>Item: {{ item }}</span>
+  <p class="test">
+    {{ testText }}
   </p>
 </template>
 
@@ -9,14 +8,14 @@
 export default {
   data() {
     return {
-      aboutText: 'About Component'
+      testText: 'Test Component'
     };
   }
 };
 </script>
 
 <style lang="scss">
-.about {
-  color: blue;
+.test {
+  color: red;
 }
 </style>

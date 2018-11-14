@@ -1,15 +1,18 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    class="body"
+  >
     <p>{{ message }}</p>
     <ul>
       <li>
         <router-link to="/">Go home!</router-link>
       </li>
       <li>
-        <router-link to="/about">Go about</router-link>
+        <router-link to="/test">Go test</router-link>
       </li>
       <li>
-        <router-link to="/about/crap">Go about thingies</router-link>
+        <router-link to="/about">Go about</router-link>
       </li>
     </ul>
     <transition
@@ -36,7 +39,7 @@ export default {
 
 <style lang="scss">
 body {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

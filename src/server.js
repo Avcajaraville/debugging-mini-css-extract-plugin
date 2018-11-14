@@ -58,6 +58,10 @@ function render(req, res) {
     url: req.url
   };
 
+  if (!['/', '/about', '/test'].includes(req.url)) {
+    return res.sendStatus(200);
+  }
+
   renderer.renderToString(context, (err, html) => {
     if (err) {
       console.error(err);

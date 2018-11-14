@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
@@ -32,37 +31,6 @@ export default {
     noParse: /es6-promise\.js$/,
     rules: [
       {
-        test: /\.(css|scss)$/,
-        oneOf: env.isProd
-          ? [
-            {
-              test: path.join(__dirname, '..', 'App.vue'),
-              use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-            },
-            {
-              use: ['vue-style-loader', 'css-loader', 'sass-loader']
-            }
-          ]
-          : [
-            {
-              use: [
-                'vue-style-loader',
-                {
-                  loader: 'css-loader',
-                  options: {
-                    sourceMap: true,
-                    importLoaders: 3
-                  }
-                },
-                {
-                  loader: 'sass-loader',
-                  options: { sourceMap: true }
-                }
-              ]
-            }
-          ]
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
@@ -86,12 +54,7 @@ export default {
     // make sure to include the plugin for the magic
     new VueLoaderPlugin(),
     ...env.isProd
-      ? [
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new MiniCssExtractPlugin({
-          filename: 'common.[chunkhash].css'
-        })
-      ]
+      ? [new webpack.optimize.ModuleConcatenationPlugin()]
       : [new FriendlyErrorsPlugin()]
   ]
 };
