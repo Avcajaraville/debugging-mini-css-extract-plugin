@@ -27,5 +27,14 @@ export default merge(baseConfig, {
       'process.env.VUE_ENV': '"server"'
     }),
     new VueSSRPlugin()
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(css|scss)$/,
+        // use: ['null-loader', 'css-loader', 'sass-loader']
+        use: ['null-loader']
+      }
+    ]
+  }
 });

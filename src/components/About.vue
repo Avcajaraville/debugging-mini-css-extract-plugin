@@ -1,5 +1,5 @@
 <template>
-  <p>
+  <p class="about">
     {{ aboutText }}
     <span>Item: {{ item }}</span>
   </p>
@@ -15,8 +15,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
-body {
+<style lang="scss" scoped>
+.about {
   color: blue;
 }
 </style>

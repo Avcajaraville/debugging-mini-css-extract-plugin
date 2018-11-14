@@ -13,7 +13,7 @@ export function createRouter() {
       },
       {
         path: '/about/:id?',
-        component: () => import('./components/about')
+        component: () => import('./components/About.vue')
       }
     ]
   });

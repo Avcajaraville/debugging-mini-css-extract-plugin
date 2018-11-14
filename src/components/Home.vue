@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     {{ homeText }}
     <p>
       <button @click="add()">Add 1</button>
@@ -18,8 +18,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
-body {
+<style lang="scss" scoped>
+.home {
   color: green;
 }
 </style>
