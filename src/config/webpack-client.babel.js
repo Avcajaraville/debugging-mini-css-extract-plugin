@@ -2,7 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import { VueSSRClientPlugin } from 'vue-ssr-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 import baseConfig from './webpack.babel.js';
+import { env } from './server';
 
 export default merge(baseConfig, {
   entry: path.resolve(__dirname, '..', 'entry-client.js'),
@@ -22,6 +25,14 @@ export default merge(baseConfig, {
       name: 'manifest'
     }
   },
+  module: {
+    rules: [
+      {
+        test: /\.(css|scss)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      }
+    ]
+  },
   plugins: [
     // strip dev-only code in Vue source
     new webpack.DefinePlugin({
@@ -30,6 +41,15 @@ export default merge(baseConfig, {
       ),
       'process.env.VUE_ENV': '"client"'
     }),
+    ...env.isProd
+      ? [
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new MiniCssExtractPlugin({
+          filename: '[name].[chunkhash].css',
+          chunkFilename: '[id].[chunkhash].css'
+        })
+      ]
+      : [new FriendlyErrorsPlugin()],
     new VueSSRClientPlugin()
   ]
 });

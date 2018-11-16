@@ -9,11 +9,18 @@ export function createRouter() {
     routes: [
       {
         path: '/',
+        name: 'home',
         component: () => import('./components/Home.vue')
       },
       {
         path: '/about/:id?',
-        component: () => import('./components/about')
+        name: 'about',
+        component: () => import('./components/About.vue')
+      },
+      {
+        path: '/test',
+        name: 'test',
+        component: () => import('./components/Test.vue')
       }
     ]
   });
